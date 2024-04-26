@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css"
+    rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
+    <title>Form</title>
+</head>
+<body>
+    <form class="form" name="myForm" onsubmit="return validateForm()" method="post">
+        <div class="card">
+            <div class="form-title">
+                <h1>Alumni Membership Form</h1>
+            </div>
+            <div class="input-field">
+                <h3>Name</h3>
+                <input type="text" name="fullName" placeholder="Full Name">
+            </div>
+            <div class="input-field">
+                <h3>Email</h3>
+                <input type="text" name="email" placeholder="Email">
+            </div>
+            <div class="input-field">
+                <h3>Phone Number</h3>
+                <input type="text" name="phoneNumber" id="search-box" placeholder="Contact Number">
+            </div>
+            <div class="input-field">
+                <h3>Gender</h3>
+                <fieldset style="border: none;">
+                    <input type="radio" name="action" id="male" value="male" /><label for="male"> Male</label>
+                    <input type="radio" name="action" id="female" value="female" /><label for="female"> Female</label>
+                </fieldset>
+            </div>
+            <div class="input-field">
+                <h3>Address</h3>
+                <input type="text">
+            </div>
+            <div class="input-field">
+                <h3>Occupation</h3>
+                <input type="text">
+            </div>
+            <div class="input-field">
+                <h3>Period of Study <span style="color: red;">*</span></h3>
+                <input type="text" name="periodOfStudy" placeholder="2001-2007">
+                <h4><i>Kindly specify entry and graduation years</i></h4>
+            </div>
+            <div class="input-field">
+                <h3>Field of Study <span style="color: red;">*</span></h3>
+                <input type="text" name="fieldOfStudy">
+            </div>
+            <div class="input-field">
+                <h3>Additional education <span style="color: red;">*</span></h3>
+                <fieldset style="border: none;" name="additionalInformation" required>
+                    <input type="radio" name="action" id="yes" value="yes" /><label for="yes"> Yes</label>
+                    <input type="radio" name="action" id="no" value="no" /><label for="no"> No</label>
+                </fieldset>
+            </div>
+            <div class="input-field">
+                <h3>Signature</h3>
+                <textarea style="border: none; border-bottom: 1px solid black; background-color: white;"></textarea><br>
+                <button id="reset">Reset</button>
+                <button id="accept">Accept</button>
+            </div>
+            <div class="input-field">
+                <h3>Kindly provide details of other alumni known to you that will love to join the association</h3>
+                <textarea style="border: none; border-bottom: 1px solid black; background-color: white;"></textarea><br>
+            </div>
+            <div class="input-field">
+                <h3>Upload a photo of you</h3>
+                <input type="file" accept="image/png, image/jpeg, image/jpg">
+            </div>
+            <div class="input-field">
+                <h3>Additional Comments</h3>
+                <textarea style="border: none; border-bottom: 1px solid black; background-color: white;"></textarea><br>
+            </div>
+            <div class="submit-btn">
+                <center>
+                    <input type="submit" value="Submit">
+                </center>
+            </div>
+        </div>
+    </form>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <script>
+        function isInt(value) {
+            return !isNaN(value) && 
+                    parseInt(Number(value)) == value;
+        }
+
+        function validateForm() {
+            var result = "";
+
+            let email = document.forms["myForm"]["email"].value;
+            if (!email.includes("@")) {
+                result = "Invalid Email.";
+            }
+            
+            let phoneNumber = document.forms["myForm"]["phoneNumber"].value;
+            if (!isInt(phoneNumber)) {
+                result = "Phone Number should be valid.";
+            }
+            
+            let periodOfStudy = document.forms["myForm"]["periodOfStudy"].value;
+            if (!isInt(periodOfStudy.replace('-', ''))) {
+                result = "Period of Study format should be valid.";
+            }
+            let fieldOfStudy = document.forms["myForm"]["fieldOfStudy"].value;
+            let additionalInformation = document.forms["myForm"]["action"].value;
+            if (periodOfStudy == "" || fieldOfStudy == "" || additionalInformation == "") {
+                result = "* marked fields must be filled out.";
+            }
+
+            if (result.length > 0) {
+                alert(result);
+                return false;
+            }
+
+            alert("Form has been submit successfully.");
+            return true;
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
